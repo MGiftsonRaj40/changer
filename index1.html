@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index1</title>
+</head>
+<body>
+    <h1 id="heading">Original Heading</h1>
+    <iframe src="index2.html" style="display:none;" id="iframeUpdater"></iframe>
+
+    <script>
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'updateHeading') {
+                document.getElementById('heading').textContent = event.data.newHeading;
+            }
+        });
+    </script>
+</body>
+</html>
