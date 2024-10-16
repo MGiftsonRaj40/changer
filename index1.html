@@ -7,12 +7,22 @@
 </head>
 <body>
     <h1 id="heading">Original Heading</h1>
+
+    <!-- Invisible iframe to load index2.html -->
     <iframe src="index2.html" style="display:none;" id="iframeUpdater"></iframe>
 
     <script>
+        // Listen for messages from the iframe (index2.html)
         window.addEventListener('message', function(event) {
-            if (event.data && event.data.type === 'updateHeading') {
-                document.getElementById('heading').textContent = event.data.newHeading;
+            // Ensure the message comes from the correct origin (optional but recommended)
+            // Replace 'http://your-domain.com' with your actual domain
+            if (event.origin === window.location.origin) {
+                // Check if the message contains the correct type and update the heading
+                if (event.data && event.data.type === 'updateHeading') {
+                    document.getElementById('heading').textContent = event.data.newHeading;
+                }
+            } else {
+                console.warn("Received message from untrusted origin:", event.origin);
             }
         });
     </script>
