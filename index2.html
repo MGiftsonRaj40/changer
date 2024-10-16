@@ -14,11 +14,11 @@
         function updateHeading() {
             const newHeading = document.getElementById('newHeading').value;
             if (newHeading) {
-                // Send message to the iframe's parent
+                // Send the new heading to the parent window (index1.html)
                 window.parent.postMessage({
                     type: 'updateHeading',
                     newHeading: newHeading
-                }, '*');
+                }, window.location.origin);  // Only allow messages to be sent to the same origin
             }
         }
     </script>
